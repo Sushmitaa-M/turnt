@@ -1,0 +1,138 @@
+.team {
+  padding: 100px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--orange-light);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.team-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 10vw, 96px);
+  letter-spacing: 4px;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.team-title span {
+  color: var(--orange-primary);
+  font-style: italic;
+}
+
+.team-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 60px;
+}
+
+.founder-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 28px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  max-width: 520px;
+  margin: 0 auto;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.founder-card:hover {
+  border-color: var(--border-orange);
+  box-shadow: 0 0 60px rgba(255, 107, 0, 0.12);
+}
+
+.founder-card-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,107,0,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.founder-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange-primary), var(--orange-mid));
+  color: white;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 3px;
+  padding: 6px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.founder-avatar {
+  width: 160px;
+  height: 200px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+  position: relative;
+}
+
+.founder-silhouette {
+  width: 100px;
+  height: 140px;
+  background: linear-gradient(to bottom, #555, #333);
+  border-radius: 50px 50px 0 0;
+  position: relative;
+}
+
+.founder-silhouette::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: #444;
+  border-radius: 50%;
+}
+
+.founder-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.founder-tag {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.founder-tag.accent {
+  border-color: var(--border-orange);
+  color: var(--orange-light);
+  background: rgba(255, 107, 0, 0.08);
+}
+
+.founder-quote {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-subtle);
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--border-glass);
+  padding-top: 16px;
+  margin-top: 8px;
+}

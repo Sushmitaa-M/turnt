@@ -1,0 +1,104 @@
+@import url('https://fonts.cdnfonts.com/css/vilanders-sans');
+@import url('https://fonts.cdnfonts.com/css/ditty');
+@import url('https://fonts.cdnfonts.com/css/jorgey');
+@import url('https://fonts.cdnfonts.com/css/metultah');
+@import url('https://fonts.cdnfonts.com/css/barlow-condensed');
+:root {
+  /* Primary Sunset Colors */
+  --orange-primary: #F26A0A;
+  --orange-mid: #FF8B14;
+  --orange-light: #FFC46B;
+
+  /* Deep Red Accent */
+  --red-accent: #B12A0E;
+  --red-dark: #73190C;
+
+  /* Glow Effects */
+  --orange-glow: rgba(242, 106, 10, 0.35);
+  --orange-glow-sm: rgba(242, 106, 10, 0.15);
+
+  /* Backgrounds */
+  --bg-dark: #050505;
+  --bg-card: #0D0A09;
+  --bg-card-2: #15100E;
+
+  /* Glass Effects */
+  --bg-glass: rgba(255, 140, 20, 0.04);
+  --border-glass: rgba(255, 196, 107, 0.08);
+  --border-orange: rgba(242, 106, 10, 0.25);
+
+  /* Text */
+  --text-white: #FFF7ED;
+  --text-muted: rgba(255, 244, 230, 0.60);
+  --text-subtle: rgba(255, 244, 230, 0.35);
+
+  /* Typography */
+  --font-display:'Jorgey', sans-serif;
+  ;
+  ;
+  --font-body: 'Barlow Condensed', sans-serif;
+  --font-mono: 'Barlow Condensed', sans-serif;
+
+  /* Radius */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--orange-primary);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--orange-primary);
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+}
+
+img {
+  max-width: 100%;
+}
+
+section {
+  position: relative;
+}

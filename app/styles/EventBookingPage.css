@@ -1,0 +1,1461 @@
+/*
+ * EventBookingPage.css
+ * Matches the ANVA dark / orange / glassmorphism design system defined in App.css
+ * Fonts, CSS variables and base resets are inherited from App.css / index.css
+ */
+
+/* ─── Keyframes ─────────────────────────────────────────── */
+@keyframes eb-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes eb-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+@keyframes eb-check-pop {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes eb-ring-draw {
+  from { stroke-dashoffset: 314; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes eb-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ─── Root shell ─────────────────────────────────────────── */
+.eb-root {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Ambient colour bloom shared by all states */
+.eb-ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 1s ease;
+}
+
+/* ─── Page wrapper ───────────────────────────────────────── */
+.eb-page {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+.eb-page--success {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+/* ─── Back button ────────────────────────────────────────── */
+.eb-back-wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 24px 0;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.5s cubic-bezier(.22,1,.36,1),
+              transform 0.5s cubic-bezier(.22,1,.36,1);
+}
+.eb-back-wrap--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.eb-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.25s ease, background 0.25s ease,
+              border-color 0.25s ease, transform 0.25s ease;
+}
+.eb-back-btn:hover {
+  color: var(--text-white);
+  background: rgba(255,255,255,0.08);
+  border-color: var(--border-orange);
+  transform: translateX(-4px);
+}
+
+/* ─── Hero ───────────────────────────────────────────────── */
+.eb-hero {
+  position: relative;
+  width: 100%;
+  min-height: 62vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  /* slight bleed into margins */
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(.22,1,.36,1) 0.1s,
+              transform 0.9s cubic-bezier(.22,1,.36,1) 0.1s;
+}
+.eb-hero--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.eb-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.45;
+}
+
+.eb-hero__grad {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.eb-hero__noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.eb-hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px 52px;
+}
+
+.eb-hero__week-chip {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: white;
+  padding: 5px 14px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0.95;
+}
+
+.eb-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 10vw, 120px);
+  line-height: 0.88;
+  letter-spacing: -1px;
+  margin: 0 0 10px;
+}
+
+.eb-hero__subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.eb-hero__meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.eb-hero__meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  transition: background 0.2s ease;
+}
+.eb-hero__meta-pill--accent {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: transparent;
+}
+
+/* ─── Body layout ────────────────────────────────────────── */
+.eb-body {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 52px 24px 0;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .eb-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.eb-body__main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ─── Card base ──────────────────────────────────────────── */
+.eb-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 24px;
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: border-color 0.3s ease;
+}
+.eb-card:hover {
+  border-color: var(--border-orange);
+}
+
+.eb-card__eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+}
+
+/* ─── Event Details ──────────────────────────────────────── */
+.eb-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1) 0.2s,
+              transform 0.8s cubic-bezier(.22,1,.36,1) 0.2s;
+}
+.eb-details--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.eb-details__desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Agenda */
+.eb-agenda {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.eb-agenda__row {
+  display: grid;
+  grid-template-columns: 90px 20px 1fr;
+  align-items: center;
+  gap: 0 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-glass);
+}
+.eb-agenda__row:last-child {
+  border-bottom: none;
+}
+.eb-agenda__time {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.eb-agenda__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  justify-self: center;
+  flex-shrink: 0;
+}
+.eb-agenda__title {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Highlights */
+.eb-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.eb-highlights__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.eb-highlights__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+/* Organizer */
+.eb-organizer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.eb-organizer__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: white;
+  flex-shrink: 0;
+}
+.eb-organizer__name {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-white);
+}
+.eb-organizer__sub {
+  font-size: 12px;
+  color: var(--text-subtle);
+  margin-top: 2px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ─── Registration Form ──────────────────────────────────── */
+.eb-form {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1) 0.3s,
+              transform 0.8s cubic-bezier(.22,1,.36,1) 0.3s;
+}
+.eb-form--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.eb-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 600px) {
+  .eb-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.eb-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eb-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+}
+.eb-label__req {
+  color: var(--orange-primary);
+  margin-left: 2px;
+}
+
+.eb-input {
+  background: var(--bg-dark);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-white);
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.eb-input::placeholder {
+  color: var(--text-subtle);
+}
+.eb-input:focus {
+  border-color: var(--orange-primary);
+  box-shadow: 0 0 0 3px var(--orange-glow-sm);
+}
+.eb-input--error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12) !important;
+}
+
+.eb-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,244,230,0.35)' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+.eb-select option {
+  background: var(--bg-card-2);
+  color: var(--text-white);
+}
+
+.eb-textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+}
+
+.eb-error {
+  font-size: 11px;
+  color: #f87171;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+.eb-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: white;
+  padding: 18px 24px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.3s cubic-bezier(.22,1,.36,1),
+              background 0.3s ease;
+  margin-top: 4px;
+}
+.eb-submit-btn:not(:disabled):hover {
+  transform: translateY(-3px) scale(1.01);
+}
+.eb-submit-btn:disabled {
+  cursor: not-allowed;
+}
+.eb-submit-btn__arrow {
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+.eb-submit-btn:not(:disabled):hover .eb-submit-btn__arrow {
+  transform: translateX(5px);
+}
+
+/* Spinner */
+.eb-spinner {
+  animation: eb-spin 0.8s linear infinite;
+}
+
+/* ─── Summary Card ───────────────────────────────────────── */
+.eb-summary {
+  position: sticky;
+  top: 24px;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1) 0.4s,
+              transform 0.8s cubic-bezier(.22,1,.36,1) 0.4s;
+}
+.eb-summary--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.eb-summary__inner {
+  gap: 14px;
+  padding: 24px;
+}
+
+.eb-summary__event-img-wrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 160px;
+}
+.eb-summary__event-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+.eb-summary__img-grad {
+  position: absolute;
+  inset: 0;
+}
+.eb-summary__img-label {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+
+.eb-summary__event-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--text-white);
+  line-height: 1;
+}
+.eb-summary__event-sub {
+  font-size: 12px;
+  color: var(--text-subtle);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: -6px;
+}
+
+.eb-summary__divider {
+  height: 1px;
+  background: var(--border-glass);
+  margin: 4px 0;
+}
+
+.eb-summary__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+}
+.eb-summary__key {
+  color: var(--text-subtle);
+}
+.eb-summary__val {
+  color: var(--text-muted);
+  text-align: right;
+  max-width: 55%;
+  font-size: 12px;
+}
+
+.eb-summary__total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.eb-summary__total-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text-subtle);
+}
+.eb-summary__total-val {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.eb-summary__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.eb-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: eb-pulse-dot 2s ease-in-out infinite;
+}
+
+/* ─── Payment Section ────────────────────────────────────── */
+.eb-payment {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1) 0.45s,
+              transform 0.8s cubic-bezier(.22,1,.36,1) 0.45s;
+}
+.eb-payment--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.eb-payment__amount-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.eb-payment__label {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+.eb-payment__amount {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+}
+.eb-payment__note {
+  font-size: 12px;
+  color: var(--text-subtle);
+  line-height: 1.6;
+  margin-top: -4px;
+}
+
+.eb-payment__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: white;
+  padding: 17px 24px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.3s ease;
+}
+.eb-payment__btn:hover {
+  transform: translateY(-3px);
+}
+
+.eb-payment__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: -4px;
+}
+
+.eb-badge {
+  font-size: 11px;
+  color: var(--text-subtle);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Success Screen ─────────────────────────────────────── */
+.eb-success {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px 80px;
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: opacity 0.7s cubic-bezier(.22,1,.36,1),
+              transform 0.7s cubic-bezier(.22,1,.36,1);
+}
+.eb-success--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.eb-success__glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.eb-success__icon-wrap {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  animation: eb-float 3s ease-in-out infinite;
+}
+
+.eb-success__check-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2.5px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: eb-check-pop 0.6s cubic-bezier(.22,1,.36,1) 0.3s both;
+}
+.eb-success__check-ring svg {
+  stroke: inherit;
+  stroke-width: 2.5;
+}
+
+.eb-success__title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 8vw, 72px);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+.eb-success__sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.65;
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+.eb-success__sub strong {
+  color: var(--text-white);
+}
+
+/* Ticket card */
+.eb-success__ticket {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.eb-success__ticket-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-glass);
+}
+.eb-success__ticket-event {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--text-white);
+  margin-bottom: 4px;
+}
+.eb-success__booking-id {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--text-subtle);
+}
+
+.eb-success__ticket-body {
+  padding: 8px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.eb-success__ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.eb-success__ticket-row:last-child {
+  border-bottom: none;
+}
+.eb-success__ticket-row span:first-child {
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+.eb-success__ticket-row span:last-child {
+  color: var(--text-muted);
+  text-align: right;
+  max-width: 60%;
+}
+
+/* Action buttons */
+.eb-success__actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.eb-success__dl-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  background: transparent;
+  border: 1px solid;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  flex: 1;
+  min-width: 160px;
+  justify-content: center;
+}
+.eb-success__dl-btn:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-2px);
+}
+
+.eb-success__home-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.3s ease;
+  flex: 1;
+  min-width: 160px;
+  justify-content: center;
+}
+.eb-success__home-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .eb-hero__content {
+    padding: 0 20px 36px;
+  }
+  .eb-hero__title {
+    font-size: clamp(44px, 12vw, 80px);
+  }
+  .eb-body {
+    padding: 32px 16px 0;
+    gap: 20px;
+  }
+  .eb-card {
+    padding: 22px 20px;
+    border-radius: 18px;
+  }
+  .eb-summary {
+    position: static;
+    /* show summary before form on mobile */
+    order: -1;
+  }
+  .eb-body {
+    /* on mobile: summary first, then main */
+    display: flex;
+    flex-direction: column;
+  }
+  .eb-body__main { order: 2; }
+  .eb-summary    { order: 1; }
+}
+
+@media (max-width: 480px) {
+  .eb-success__actions {
+    flex-direction: column;
+  }
+  .eb-hero {
+    min-height: 52vh;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .eb-hero,
+  .eb-back-wrap,
+  .eb-details,
+  .eb-form,
+  .eb-summary,
+  .eb-payment,
+  .eb-success {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .eb-spinner { animation: none; }
+  .eb-status-dot { animation: none; }
+  .eb-success__icon-wrap { animation: none; }
+  .eb-back-btn:hover { transform: none; }
+  .eb-submit-btn:hover { transform: none; }
+  .eb-payment__btn:hover { transform: none; }
+}
+
+/*
+ * EventBookingPage.addendum.css
+ *
+ * Append these rules to your existing EventBookingPage.css
+ * They add styles for: StepBar, PaymentPage, ticket perf + QR footer.
+ */
+
+/* ─── Step Bar ───────────────────────────────────────────── */
+.eb-stepbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 1.5rem 1.5rem 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.eb-stepbar__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.eb-stepbar__circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.eb-stepbar__circle svg {
+  /* shrink the check icon inside the circle */
+  width: 14px;
+  height: 14px;
+}
+
+.eb-stepbar__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.eb-stepbar__line {
+  width: 48px;
+  height: 2px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin: 0 0.75rem;
+  transition: background 0.4s ease;
+}
+
+@media (max-width: 480px) {
+  .eb-stepbar__line { width: 24px; margin: 0 0.4rem; }
+  .eb-stepbar__label { display: none; }
+}
+
+/* ─── Back btn inline variant (payment page) ────────────── */
+.eb-back-btn--inline {
+  margin: 1.25rem 0 1.5rem;
+  display: inline-flex;
+}
+
+/* ─── Payment Page Layout ───────────────────────────────── */
+.eb-payment-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.eb-payment-page--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eb-payment-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 780px) {
+  .eb-payment-layout {
+    grid-template-columns: 1fr;
+  }
+  .eb-payment-right {
+    order: -1; /* order summary on top on mobile */
+  }
+}
+
+/* ─── Method tabs ───────────────────────────────────────── */
+.eb-method-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.eb-method-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.04em;
+}
+
+.eb-method-tab:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.eb-method-tab--active {
+  font-weight: 700;
+}
+
+.eb-method-body {
+  margin-bottom: 0.5rem;
+  animation: eb-fade-in 0.25s ease;
+}
+
+@keyframes eb-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.eb-payment-hint {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 0.5rem;
+}
+
+/* ─── Razorpay redirect note ─────────────────────────────── */
+.eb-razorpay-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  gap: 0.75rem;
+}
+
+.eb-razorpay-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* ─── Free event badge ───────────────────────────────────── */
+.eb-payment-free {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 1rem 0 0.5rem;
+}
+
+.eb-payment-free__badge {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  border: 1px solid;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.eb-payment-free__note {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 280px;
+  line-height: 1.6;
+}
+
+/* ─── Order summary image ────────────────────────────────── */
+.eb-order-summary__img-wrap {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 120px;
+  margin-bottom: 0.875rem;
+}
+
+.eb-order-summary__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eb-order-summary__img-grad {
+  position: absolute;
+  inset: 0;
+}
+
+.eb-order-summary__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.15rem;
+}
+
+.eb-order-summary__sub {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.25rem;
+}
+
+/* ─── Ticket performation & QR ──────────────────────────── */
+.eb-ticket-perf {
+  position: relative;
+  border-top: 2px dashed;
+  margin: 0 -1px;
+}
+
+.eb-ticket-perf__notch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.eb-ticket-perf__notch--left  { left: -8px; }
+.eb-ticket-perf__notch--right { right: -8px; }
+
+.eb-success__ticket-footer {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.eb-ticket-qr {
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.eb-ticket-footer-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* ─── eb-page wrapper (used by payment + success steps) ─── */
+.eb-page {
+  min-height: 100vh;
+  padding-top: 1.5rem;
+}
+
+.eb-page--success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 4rem;
+}
+
+/*
+ * EventBookingPage.offers.css
+ *
+ * Append to your existing EventBookingPage.css
+ * Covers: Offers strip, offer cards, payment amount block, Razorpay error.
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   Offers Strip
+══════════════════════════════════════════════════════════ */
+.eb-offers-strip {
+  max-width: 960px;
+  margin: 0 auto 1.25rem;
+  padding: 0 1.5rem;
+}
+
+.eb-offers-strip__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.eb-offers-strip__list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ─── Individual offer card ─────────────────────────────── */
+.eb-offer-card {
+  position: relative;
+  flex: 1;
+  min-width: 160px;
+  max-width: 220px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  padding: 14px 16px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.25s ease,
+              background 0.25s ease,
+              box-shadow 0.25s ease,
+              transform 0.2s cubic-bezier(.22,1,.36,1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eb-offer-card:hover {
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+
+.eb-offer-card--active {
+  transform: translateY(-2px);
+}
+
+/* Star tier */
+.eb-offer-card__star {
+  font-size: 13px;
+  letter-spacing: 2px;
+  line-height: 1;
+  transition: color 0.25s ease;
+}
+
+/* Small badge pill (EARLY BIRD / GROUP DEAL / HOT) */
+.eb-offer-card__badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  transition: background 0.25s ease, color 0.25s ease;
+  align-self: flex-start;
+}
+
+/* Promo code */
+.eb-offer-card__code {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+  transition: color 0.25s ease;
+}
+
+/* Short description */
+.eb-offer-card__desc {
+  font-size: 11px;
+  color: var(--text-subtle);
+  line-height: 1.4;
+}
+
+/* Pricing row */
+.eb-offer-card__pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.eb-offer-card__new {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+  transition: color 0.25s ease;
+}
+
+.eb-offer-card__save {
+  font-size: 10px;
+  color: #4ade80;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+/* Active tick in corner */
+.eb-offer-card__tick {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: eb-check-pop 0.3s cubic-bezier(.22,1,.36,1) both;
+}
+
+.eb-offer-card__tick svg {
+  width: 11px;
+  height: 11px;
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+@media (max-width: 600px) {
+  .eb-offers-strip__list {
+    flex-direction: column;
+  }
+  .eb-offer-card {
+    max-width: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Payment Amount Block (inside the payment card)
+══════════════════════════════════════════════════════════ */
+.eb-payment-amount-block {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eb-payment-amount-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eb-payment-amount-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: 3px;
+}
+
+.eb-payment-amount-original {
+  font-size: 13px;
+  color: rgba(255,255,255,0.25);
+  text-decoration: line-through;
+}
+
+.eb-payment-amount-val {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* "You save ₹X" badge */
+.eb-payment-saving-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid;
+  letter-spacing: 0.03em;
+  animation: eb-fade-in 0.25s ease;
+}
+
+/* Nudge text when no offer selected */
+.eb-payment-offer-nudge {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* ─── Razorpay error banner ──────────────────────────────── */
+.eb-rz-error {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #fca5a5;
+  line-height: 1.5;
+  animation: eb-fade-in 0.25s ease;
+}
