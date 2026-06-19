@@ -43,3 +43,5 @@ next-env.d.ts
 node_modules
 
 ui-ux-pro-max/
+
+package-lock.json

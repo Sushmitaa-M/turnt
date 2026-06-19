@@ -27,7 +27,7 @@ export default function FAQ() {
           <span className="white">COMMON </span>
           <span className="orange">QUESTIONS</span>
         </motion.h2>
-        <p className="faq-subtitle">Everything you need to know about joining Chennai's most vibey community.</p>
+        <p className="faq-subtitle">Everything you need to know about joining Chennai&apos;s most vibey community.</p>
       </div>
 
       <div className="faq-list">

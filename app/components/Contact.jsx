@@ -37,7 +37,7 @@ export default function Contact() {
           fontSize: 'clamp(48px, 10vw, 120px)',
           color: '#FFF7ED',
         }}>
-          DON'T BE A<br />
+          DON&apos;T BE A<br />
           <span style={{
             background: 'linear-gradient(135deg, #F26A0A, #FFC46B)',
             WebkitBackgroundClip: 'text',

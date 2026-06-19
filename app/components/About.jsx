@@ -62,7 +62,7 @@ export default function About() {
               No roles to perform. No pressure to impress. Just people choosing presence, good company, and real connection.
             </motion.p>
             <motion.p {...spring(0.25)} className="text-sm leading-relaxed" style={{ color: 'rgba(255,244,230,0.35)' }}>
-              You do not need to be anyone special. You do not need a plan. You just need to show up. We hold space for every mood, every story, and every vibe.
+              You don&apos;t need to be anyone special. You don&apos;t need a plan. You just need to show up. We hold space for every mood, every story, and every vibe.
             </motion.p>
           </div>
         </div>

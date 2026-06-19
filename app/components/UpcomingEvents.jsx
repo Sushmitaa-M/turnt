@@ -341,7 +341,7 @@ export default function UpcomingEvents() {
   }, []);
 
   useEffect(() => {
-    if (!user) { setInterests(new Set()); return; }
+    if (!user) { queueMicrotask(() => setInterests(new Set())); return; }
     async function fetchInterests() {
       const { data } = await supabase
         .from('event_interests')
@@ -362,7 +362,7 @@ export default function UpcomingEvents() {
   };
 
   const go = useCallback(
-    (next, direction) => {
+    (next) => {
       if (animating || next === active) return;
       setAnimating(true);
       setTimeout(() => {
@@ -373,8 +373,8 @@ export default function UpcomingEvents() {
     [animating, active]
   );
 
-  const goNext = () => go((active + 1) % events.length, 1);
-  const goPrev = () => go((active - 1 + events.length) % events.length, -1);
+  const goNext = () => go((active + 1) % events.length);
+  const goPrev = () => go((active - 1 + events.length) % events.length);
 
   useKeyPress("ArrowRight", goNext);
   useKeyPress("ArrowLeft", goPrev);
@@ -440,7 +440,7 @@ export default function UpcomingEvents() {
                 color: '#FFF7ED',
               }}
             >
-              What's <em style={{ color: event.accent, fontStyle: 'normal' }}>Next</em>
+              What&apos;s <em style={{ color: event.accent, fontStyle: 'normal' }}>Next</em>
             </h2>
 
             {events.length > 1 && (

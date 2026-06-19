@@ -95,7 +95,7 @@ export default function Footer() {
               href="mailto:hello@turntchennai.com"
               className="mt-2 px-8 py-3 bg-[#050505] text-[#F26A0A] rounded-full font-bold uppercase tracking-widest hover:scale-105 hover:shadow-[0_0_20px_rgba(242,106,10,0.5)] transition-all"
             >
-              Let's Chat!
+              Let&apos;s Chat!
             </a>
           </div>
 

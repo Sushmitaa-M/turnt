@@ -32,7 +32,7 @@ export default function Reviews() {
         <div className="reviews-track">
           {doubled.map((r, i) => (
             <div className="review-card" key={i}>
-              <div className="review-quote-icon">"</div>
+              <div className="review-quote-icon">&quot;</div>
               <div className="review-user">
                 <div className="review-avatar">{r.initial}</div>
                 <div>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import './styles/App.css'
 import './styles/index.css'
 

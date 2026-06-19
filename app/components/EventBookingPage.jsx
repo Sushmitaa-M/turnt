@@ -8,7 +8,7 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import '../styles/EventBookingPage.css';
 
@@ -865,7 +865,7 @@ function SuccessScreen({ event, data, onHome }) {
         </div>
       </div>
 
-      <h2 className="eb-success__title" style={{ color: event.accent }}>You're In!</h2>
+      <h2 className="eb-success__title" style={{ color: event.accent }}>You&apos;re In!</h2>
       <p className="eb-success__sub">
         Your spot is confirmed for <strong>{event.name}</strong>. See you there!
       </p>
@@ -957,7 +957,6 @@ function SuccessScreen({ event, data, onHome }) {
 ═══════════════════════════════════════════════════════════ */
 export default function EventBookingPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const event = DEFAULT_EVENT;
 
