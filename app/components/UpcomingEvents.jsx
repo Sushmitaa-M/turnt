@@ -328,7 +328,7 @@ export default function UpcomingEvents() {
       setUser(currentUser);
       const { data: dbEvents, error } = await supabase
         .from('events')
-        .select('*')
+        .select('id, name, description, date_time, venue, reg_link')
         .order('date_time', { ascending: true });
       if (!error && dbEvents && dbEvents.length > 0) {
         setEvents(dbEvents.map((e, i) => formatDbEvent(e, i)));
@@ -357,9 +357,7 @@ export default function UpcomingEvents() {
       router.push('/login?returnTo=' + encodeURIComponent(pathname));
       return;
     }
-    const { error } = await supabase
-      .from('event_interests')
-      .insert({ user_id: user.id, event_id: eventId });
+    const { error } = await supabase.rpc('add_event_interest', { p_event_id: eventId });
     if (!error) setInterests((prev) => new Set([...prev, eventId]));
   };
 

@@ -23,7 +23,7 @@ export default function MyEventsSidebar({ isOpen, onClose }) {
 
       const { data } = await supabase
         .from('event_interests')
-        .select('*, events(*)')
+        .select('id, event_id, created_at, events(id, name, date_time, venue)')
         .eq('user_id', currentUser.id)
 
       setRsvps(data || [])
