@@ -12,7 +12,7 @@ export default function Team() {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        The minds and hearts behind Club Anva.
+        The minds and hearts behind Turnt.
       </motion.p>
 
       <motion.h2
@@ -42,11 +42,11 @@ export default function Team() {
         <div className="founder-tags">
           <span className="founder-tag">21 years young</span>
           <span className="founder-tag accent">Zodiac: Taurus</span>
-          <span className="founder-tag accent">Trains hard. Plans harder.</span>
-          <span className="founder-tag">IF IT RAINS WE WILL RUN.</span>
+          <span className="founder-tag accent">Plans events. Creates vibes.</span>
+          <span className="founder-tag">RAIN OR SHINE WE SHOW UP.</span>
           <span className="founder-tag accent">Turns ideas into movements!</span>
-          <span className="founder-tag">Makes running feel human</span>
-          <span className="founder-tag">Built ANVA because running alone is boring.</span>
+          <span className="founder-tag">Makes strangers feel like friends</span>
+          <span className="founder-tag">Built TURNT because being stuck in the group chat is boring.</span>
         </div>
 
         <div className="founder-quote">Born to do side quests</div>

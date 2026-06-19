@@ -2,13 +2,13 @@ import './styles/App.css'
 import './styles/index.css'
 
 export const metadata = {
-  title: 'Club Anva — Run Play Connect',
-  description: 'Easy Run · Beach Games · Good Vibes',
+  title: 'Turnt — IRL Hangouts & Good Vibes',
+  description: 'Turnt is a Chennai Gen-Z hangout community where we actually meet IRL, make friends, and do the fun stuff we\'ve all been postponing forever.',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

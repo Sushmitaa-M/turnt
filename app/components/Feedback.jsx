@@ -28,7 +28,7 @@ export default function Feedback() {
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        Tell us what you loved about running with ANVA
+        Tell us what you loved about hanging out with TURNT
       </motion.p>
 
       <motion.div

@@ -9,45 +9,44 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 import '../styles/EventBookingPage.css';
 
 /* ─── Fallback event data ──────────────────────────────────── */
 const DEFAULT_EVENT = {
   id: 1,
-  week: 'WEEK 12',
-  name: 'Saturday Run',
-  subtitle: 'ft. nxtface',
-  date: 'Saturday, 7th June',
-  time: '6:00 – 8:00 AM',
+  week: 'NEXT UP',
+  name: 'SunBurn Meet-up',
+  subtitle: 'good vibes only',
+  date: 'Saturday, 12th July',
+  time: '5:00 – 8:00 AM',
   location: 'Bessyy',
   locationFull: 'Besant Nagar Beach, Chennai',
   status: 'open',
   statusLabel: 'Registration Open',
   tag: 'OPEN TO ALL',
   about:
-    "A chill run w games — waves & vibes, 3km run and amazing games. We're definitely getting inside the water and stuff!!",
+    'A chill evening by the waves. Good vibes, good people, no boring scenes. Come solo or bring the crew — everyone is welcome.',
   accent: '#FF6B00',
-  posterLabel: 'SATURDAY\nRUN',
-  bgWord: 'ANVA',
+  posterLabel: 'SUNSET\nBEACH',
+  bgWord: 'TURNT',
   image:
     'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1200&auto=format&fit=crop&q=80',
-  fee: '₹1,000',
-  feeAmount: 100000, // in paise (₹1,000 × 100)
-  category: 'Community Run',
-  organizer: 'ANVA Run Club',
+  fee: 'Free',
+  feeAmount: 0,
+  category: 'Community Hangout',
+  organizer: 'Turnt Community',
   agenda: [
-    { time: '5:45 AM', title: 'Assembly & Warm-up' },
-    { time: '6:00 AM', title: '3 km Run Begins' },
-    { time: '6:45 AM', title: 'Beach Games & Activities' },
-    { time: '7:30 AM', title: 'Cool-down & Group Photo' },
-    { time: '8:00 AM', title: 'Wrap-up & Refreshments' },
+    { time: '5:00 AM', title: 'Assembly & Vibe Check' },
+    { time: '5:30 AM', title: 'Beach Games & Icebreakers' },
+    { time: '6:30 AM', title: 'Sunset Chill & Photos' },
   ],
   highlights: [
-    'Scenic 3 km beachside route',
-    'Curated playlist by nxtface',
-    'Community games on the sand',
-    'Water entry allowed — bring a change of clothes!',
-    'Open to all fitness levels',
+    'Chill evening by Besant Nagar Beach',
+    'Beach games and icebreakers',
+    'Sunset views and group photos',
+    'Snacks and good conversations',
+    'Open to everyone — come solo or with friends',
   ],
 };
 
@@ -141,8 +140,8 @@ const LockIcon = () => (
 const TagIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-    <line x1="7" y1="7" x2="7.01" y2="7"/>
+    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+    <line x1="7" y1="7" x2="7.01" y2="7" />
   </svg>
 );
 
@@ -188,14 +187,14 @@ function StepBar({ step, accent }) {
 
 /* ─── Validation ─────────────────────────────────────────────── */
 const VALIDATORS = {
-  fullName:    (v) => v.trim().length < 2 ? 'Please enter your full name' : '',
-  email:       (v) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Enter a valid email address' : '',
-  phone:       (v) => !/^\+?[\d\s\-]{8,15}$/.test(v) ? 'Enter a valid phone number' : '',
+  fullName: (v) => v.trim().length < 2 ? 'Please enter your full name' : '',
+  email: (v) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Enter a valid email address' : '',
+  phone: (v) => !/^\+?[\d\s\-]{8,15}$/.test(v) ? 'Enter a valid phone number' : '',
   institution: (v) => v.trim().length < 2 ? 'College / Company name is required' : '',
-  department:  () => '',
+  department: () => '',
   yearOfStudy: () => '',
   eventSelection: () => '',
-  notes:       () => '',
+  notes: () => '',
 };
 
 const INITIAL_FORM = {
@@ -204,12 +203,12 @@ const INITIAL_FORM = {
 };
 
 function generateBookingId() {
-  return 'ANVA-' + Math.random().toString(36).toUpperCase().slice(2, 8);
+  return 'TRNT-' + Math.random().toString(36).toUpperCase().slice(2, 8);
 }
 
 /* ═══════════════════════════════════════════════════════════
    OffersStrip  — shown above payment card
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function OffersStrip({ event, selectedOffer, onSelect }) {
   return (
     <div className="eb-offers-strip">
@@ -234,7 +233,6 @@ function OffersStrip({ event, selectedOffer, onSelect }) {
               } : {}}
               onClick={() => onSelect(active ? null : offer)}
             >
-              {/* Star tier badge */}
               <div
                 className="eb-offer-card__star"
                 style={{ color: active ? event.accent : 'rgba(255,200,100,0.7)' }}
@@ -242,7 +240,6 @@ function OffersStrip({ event, selectedOffer, onSelect }) {
                 {offer.star}
               </div>
 
-              {/* Badge label */}
               <div
                 className="eb-offer-card__badge"
                 style={{
@@ -253,16 +250,13 @@ function OffersStrip({ event, selectedOffer, onSelect }) {
                 {offer.badge}
               </div>
 
-              {/* Code */}
               <div className="eb-offer-card__code"
                 style={{ color: active ? event.accent : 'rgba(255,255,255,0.85)' }}>
                 {offer.label}
               </div>
 
-              {/* Description */}
               <div className="eb-offer-card__desc">{offer.desc}</div>
 
-              {/* Pricing */}
               <div className="eb-offer-card__pricing">
                 <span className="eb-offer-card__new"
                   style={{ color: active ? event.accent : 'rgba(255,255,255,0.9)' }}>
@@ -271,7 +265,6 @@ function OffersStrip({ event, selectedOffer, onSelect }) {
                 <span className="eb-offer-card__save">save ₹{savings.toLocaleString('en-IN')}</span>
               </div>
 
-              {/* Active tick */}
               {active && (
                 <div className="eb-offer-card__tick" style={{ background: event.accent }}>
                   <CheckIcon />
@@ -287,11 +280,11 @@ function OffersStrip({ event, selectedOffer, onSelect }) {
 
 /* ═══════════════════════════════════════════════════════════
    HeroBanner
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function HeroBanner({ event, visible }) {
   return (
     <div className={`eb-hero${visible ? ' eb-hero--visible' : ''}`}>
-      <img src={event.image} alt={event.name} className="eb-hero__bg" />
+      <Image src={event.image} alt={event.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="eb-hero__bg" />
       <div
         className="eb-hero__grad"
         style={{
@@ -346,7 +339,7 @@ function HeroBanner({ event, visible }) {
 
 /* ═══════════════════════════════════════════════════════════
    EventDetails (left column on step 1)
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function EventDetails({ event, visible }) {
   return (
     <div className={`eb-details${visible ? ' eb-details--visible' : ''}`}>
@@ -396,14 +389,14 @@ function EventDetails({ event, visible }) {
 
 /* ═══════════════════════════════════════════════════════════
    SummaryCard  (sticky sidebar)
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function SummaryCard({ event, visible }) {
   return (
     <aside className={`eb-summary${visible ? ' eb-summary--visible' : ''}`}>
       <div className="eb-card eb-summary__inner">
         <div className="eb-card__eyebrow">REGISTRATION SUMMARY</div>
         <div className="eb-summary__event-img-wrap">
-          <img src={event.image} alt={event.name} className="eb-summary__event-img" />
+          <Image src={event.image} alt={event.name} fill sizes="(max-width: 768px) 100vw, 300px" className="eb-summary__event-img" />
           <div className="eb-summary__img-grad"
             style={{ background: 'linear-gradient(to top, #0d0a09 0%, transparent 70%)' }} />
           <div className="eb-summary__img-label">{event.week}</div>
@@ -413,7 +406,7 @@ function SummaryCard({ event, visible }) {
         <div className="eb-summary__divider" />
         <div className="eb-summary__row">
           <span className="eb-summary__key">Ticket Type</span>
-          <span className="eb-summary__val">General Entry</span>
+          <span className="eb-summary__val">General Admission</span>
         </div>
         <div className="eb-summary__row">
           <span className="eb-summary__key">Date</span>
@@ -447,7 +440,7 @@ function SummaryCard({ event, visible }) {
 
 /* ═══════════════════════════════════════════════════════════
    STEP 1 — RegistrationForm
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function RegistrationForm({ event, onSuccess, visible }) {
   const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
@@ -547,13 +540,11 @@ function RegistrationForm({ event, onSuccess, visible }) {
         </div>
 
         <div className="eb-form__field">
-          <label className="eb-label">Event Selection</label>
+          <label className="eb-label">Ticket Type</label>
           <select className="eb-input eb-select" name="eventSelection"
             value={form.eventSelection} onChange={handleChange}>
-            <option value="">Choose your slot / category</option>
-            <option value="3km">3 km Run</option>
-            <option value="fun">Fun Walk + Games</option>
-            <option value="volunteer">Volunteer</option>
+            <option value="">Choose your ticket</option>
+            <option value="general">General Admission</option>
           </select>
         </div>
 
@@ -582,23 +573,33 @@ function RegistrationForm({ event, onSuccess, visible }) {
 
 /* ═══════════════════════════════════════════════════════════
    STEP 2 — PaymentPage  (Razorpay wired)
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
   const [selectedOffer, setSelectedOffer] = useState(null);
   const [paying, setPaying] = useState(false);
   const [rzError, setRzError] = useState('');
 
-  /* Compute final amount */
-  const baseAmount = event.feeAmount || 100000; // paise
+  const baseAmount = event.feeAmount || 0;
   const finalAmount = selectedOffer
     ? Math.round(baseAmount * (1 - selectedOffer.discount))
     : baseAmount;
-  const finalDisplay = `₹${(finalAmount / 100).toLocaleString('en-IN')}`;
+  const finalDisplay = baseAmount === 0 ? 'Free' : `₹${(finalAmount / 100).toLocaleString('en-IN')}`;
   const saving = baseAmount - finalAmount;
 
   const handlePay = async () => {
     setRzError('');
     setPaying(true);
+
+    if (baseAmount === 0) {
+      setPaying(false);
+      onSuccess({
+        ...formData,
+        bookingId: generateBookingId(),
+        amountPaid: 'Free',
+        offerUsed: null,
+      });
+      return;
+    }
 
     const loaded = await loadRazorpay();
     if (!loaded) {
@@ -607,32 +608,24 @@ function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
       return;
     }
 
-    /* ── Razorpay options ─────────────────────────────────────
-       For production:
-         1. Hit your backend → POST /api/create-order → returns order_id
-         2. Replace `order_id` below with that value
-         3. Verify signature on your backend in the `handler`
-       For DEMO: Razorpay test key opens the checkout UI as-is.
-    ─────────────────────────────────────────────────────── */
     const options = {
-      key: 'rzp_test_1DP5mmOlF5G5ag', // Razorpay public test key
-      amount: finalAmount,             // in paise
+      key: 'rzp_test_1DP5mmOlF5G5ag',
+      amount: finalAmount,
       currency: 'INR',
       name: event.organizer,
-      description: `${event.name} — General Entry`,
+      description: `${event.name} — General Admission`,
       image: event.image,
-      // order_id: '<from your backend>',  // uncomment in production
 
       prefill: {
-        name:    formData.fullName,
-        email:   formData.email,
+        name: formData.fullName,
+        email: formData.email,
         contact: formData.phone,
       },
 
       notes: {
-        event_id:    event.id,
+        event_id: event.id,
         institution: formData.institution,
-        offer_code:  selectedOffer?.id || 'NONE',
+        offer_code: selectedOffer?.id || 'NONE',
       },
 
       theme: {
@@ -646,7 +639,6 @@ function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
       },
 
       handler: (response) => {
-        /* In production: verify razorpay_signature on your backend first */
         setPaying(false);
         onSuccess({
           ...formData,
@@ -664,7 +656,7 @@ function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
         setPaying(false);
       });
       rzp.open();
-    } catch (err) {
+    } catch {
       setRzError('Something went wrong launching Razorpay. Please try again.');
       setPaying(false);
     }
@@ -672,21 +664,19 @@ function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
 
   return (
     <div className={`eb-payment-page${visible ? ' eb-payment-page--visible' : ''}`}>
-      {/* Back link */}
       <button className="eb-back-btn eb-back-btn--inline" onClick={onBack}>
         <ArrowLeftIcon /> Edit Details
       </button>
 
-      {/* ── Offers strip (above payment card) ── */}
-      <OffersStrip event={event} selectedOffer={selectedOffer} onSelect={setSelectedOffer} />
+      {baseAmount > 0 && (
+        <OffersStrip event={event} selectedOffer={selectedOffer} onSelect={setSelectedOffer} />
+      )}
 
       <div className="eb-payment-layout">
-        {/* ── Left: Payment form ── */}
         <div className="eb-payment-left">
           <div className="eb-card">
             <div className="eb-card__eyebrow">PAYMENT</div>
 
-            {/* Amount display */}
             <div className="eb-payment-amount-block">
               <div className="eb-payment-amount-row">
                 <div>
@@ -702,24 +692,22 @@ function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
               {selectedOffer && (
                 <div className="eb-payment-saving-badge"
                   style={{ color: event.accent, borderColor: `${event.accent}44`, background: `${event.accent}10` }}>
-                  🎉 You save ₹{(saving / 100).toLocaleString('en-IN')} with <strong>{selectedOffer.id}</strong>
+                  You save ₹{(saving / 100).toLocaleString('en-IN')} with <strong>{selectedOffer.id}</strong>
                 </div>
               )}
-              {!selectedOffer && (
+              {!selectedOffer && baseAmount > 0 && (
                 <p className="eb-payment-offer-nudge">
-                  ↑ Apply an offer above to get a discount
+                  Apply an offer above to get a discount
                 </p>
               )}
             </div>
 
-            {/* Error */}
             {rzError && (
               <div className="eb-rz-error">
-                ⚠ {rzError}
+                {rzError}
               </div>
             )}
 
-            {/* Pay button */}
             <button
               className="eb-submit-btn"
               disabled={paying}
@@ -733,28 +721,27 @@ function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
               onClick={handlePay}
             >
               {paying ? (
-                <><SpinnerIcon /> Opening Razorpay…</>
+                <><SpinnerIcon /> Processing…</>
               ) : (
-                <>Pay {finalDisplay} via Razorpay <span className="eb-submit-btn__arrow">→</span></>
+                <>{baseAmount === 0 ? 'Confirm Registration' : `Pay ${finalDisplay} via Razorpay`} <span className="eb-submit-btn__arrow">→</span></>
               )}
             </button>
 
             <div className="eb-payment__badges">
               <span className="eb-badge"><LockIcon /> SSL Secured</span>
-              <span className="eb-badge">⚡ Instant Confirmation</span>
-              <span className="eb-badge">↩ Easy Refunds</span>
-              <span className="eb-badge">🛡 Razorpay Protected</span>
+              <span className="eb-badge">Instant Confirmation</span>
+              <span className="eb-badge">Easy Refunds</span>
+              <span className="eb-badge">Razorpay Protected</span>
             </div>
           </div>
         </div>
 
-        {/* ── Right: Order summary ── */}
         <div className="eb-payment-right">
           <div className="eb-card">
             <div className="eb-card__eyebrow">ORDER SUMMARY</div>
             <div className="eb-order-summary">
               <div className="eb-order-summary__img-wrap">
-                <img src={event.image} alt={event.name} className="eb-order-summary__img" />
+                <Image src={event.image} alt={event.name} fill sizes="(max-width: 768px) 100vw, 200px" className="eb-order-summary__img" />
                 <div
                   className="eb-order-summary__img-grad"
                   style={{ background: 'linear-gradient(to top, #0d0a09 0%, transparent 70%)' }}
@@ -806,7 +793,7 @@ function PaymentPage({ event, formData, onSuccess, onBack, visible }) {
 
 /* ═══════════════════════════════════════════════════════════
    STEP 3 — SuccessScreen (Ticket)
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 function SuccessScreen({ event, data, onHome }) {
   const [show, setShow] = useState(false);
   const ticketRef = useRef(null);
@@ -823,7 +810,7 @@ function SuccessScreen({ event, data, onHome }) {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>ANVA Ticket — ${event.name}</title>
+        <title>Turnt Ticket — ${event.name}</title>
         <style>
           body { font-family: system-ui, sans-serif; background: #0d0a09; color: #fff; padding: 2rem; }
           .ticket { max-width: 480px; margin: auto; border: 1px solid ${event.accent}44;
@@ -878,12 +865,11 @@ function SuccessScreen({ event, data, onHome }) {
         </div>
       </div>
 
-      <h2 className="eb-success__title" style={{ color: event.accent }}>You're Registered!</h2>
+      <h2 className="eb-success__title" style={{ color: event.accent }}>You're In!</h2>
       <p className="eb-success__sub">
-        Your spot is confirmed for <strong>{event.name}</strong>. We can't wait to run with you.
+        Your spot is confirmed for <strong>{event.name}</strong>. See you there!
       </p>
 
-      {/* Ticket */}
       <div className="eb-success__ticket" ref={ticketRef}>
         <div
           className="eb-success__ticket-header"
@@ -912,7 +898,6 @@ function SuccessScreen({ event, data, onHome }) {
           )}
         </div>
 
-        {/* Dashed perforation line */}
         <div className="eb-ticket-perf" style={{ borderColor: `${event.accent}33` }}>
           <span className="eb-ticket-perf__notch eb-ticket-perf__notch--left"
             style={{ background: '#050505' }} />
@@ -923,19 +908,19 @@ function SuccessScreen({ event, data, onHome }) {
         <div className="eb-success__ticket-footer">
           <div className="eb-ticket-qr" style={{ borderColor: `${event.accent}33` }}>
             <svg viewBox="0 0 80 80" width="64" height="64" fill={event.accent} opacity="0.7">
-              <rect x="0" y="0" width="32" height="32" rx="4" fill="none" stroke={event.accent} strokeWidth="4"/>
-              <rect x="8" y="8" width="16" height="16" rx="2"/>
-              <rect x="48" y="0" width="32" height="32" rx="4" fill="none" stroke={event.accent} strokeWidth="4"/>
-              <rect x="56" y="8" width="16" height="16" rx="2"/>
-              <rect x="0" y="48" width="32" height="32" rx="4" fill="none" stroke={event.accent} strokeWidth="4"/>
-              <rect x="8" y="56" width="16" height="16" rx="2"/>
-              <rect x="48" y="48" width="8" height="8" rx="1"/>
-              <rect x="60" y="48" width="8" height="8" rx="1"/>
-              <rect x="72" y="48" width="8" height="8" rx="1"/>
-              <rect x="48" y="60" width="8" height="8" rx="1"/>
-              <rect x="72" y="60" width="8" height="8" rx="1"/>
-              <rect x="48" y="72" width="8" height="8" rx="1"/>
-              <rect x="60" y="72" width="20" height="8" rx="1"/>
+              <rect x="0" y="0" width="32" height="32" rx="4" fill="none" stroke={event.accent} strokeWidth="4" />
+              <rect x="8" y="8" width="16" height="16" rx="2" />
+              <rect x="48" y="0" width="32" height="32" rx="4" fill="none" stroke={event.accent} strokeWidth="4" />
+              <rect x="56" y="8" width="16" height="16" rx="2" />
+              <rect x="0" y="48" width="32" height="32" rx="4" fill="none" stroke={event.accent} strokeWidth="4" />
+              <rect x="8" y="56" width="16" height="16" rx="2" />
+              <rect x="48" y="48" width="8" height="8" rx="1" />
+              <rect x="60" y="48" width="8" height="8" rx="1" />
+              <rect x="72" y="48" width="8" height="8" rx="1" />
+              <rect x="48" y="60" width="8" height="8" rx="1" />
+              <rect x="72" y="60" width="8" height="8" rx="1" />
+              <rect x="48" y="72" width="8" height="8" rx="1" />
+              <rect x="60" y="72" width="20" height="8" rx="1" />
             </svg>
           </div>
           <div className="eb-ticket-footer-text" style={{ color: `rgba(255,255,255,0.3)` }}>
@@ -969,19 +954,17 @@ function SuccessScreen({ event, data, onHome }) {
 
 /* ═══════════════════════════════════════════════════════════
    Root — EventBookingPage
-══════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════ */
 export default function EventBookingPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const event = DEFAULT_EVENT; // Next.js: pass event data via query params or use DEFAULT_EVENT
+  const event = DEFAULT_EVENT;
 
-
-
-  const [step, setStep]               = useState(1);
-  const [formData, setFormData]       = useState(null);
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState(null);
   const [successData, setSuccessData] = useState(null);
-  const [visible, setVisible]         = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -998,10 +981,9 @@ export default function EventBookingPage() {
     }, 200);
   };
 
-  const handleFormDone    = (data) => { setFormData(data); goToStep(2); };
+  const handleFormDone = (data) => { setFormData(data); goToStep(2); };
   const handlePaymentDone = (data) => { setSuccessData(data); goToStep(3); };
 
-  /* ── Step 3: Success / Ticket ── */
   if (step === 3) {
     return (
       <div className="eb-root">
@@ -1016,7 +998,6 @@ export default function EventBookingPage() {
     );
   }
 
-  /* ── Step 2: Payment ── */
   if (step === 2) {
     return (
       <div className="eb-root">
@@ -1037,7 +1018,6 @@ export default function EventBookingPage() {
     );
   }
 
-  /* ── Step 1: Details + Form ── */
   return (
     <div className="eb-root">
       <div className="eb-ambient"

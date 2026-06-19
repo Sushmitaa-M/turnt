@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import EventBookingPage from '../components/EventBookingPage'
 
 export const metadata = {
-  title: 'Event Booking — Club Anva',
+  title: 'Event Booking — Turnt',
 }
 
 export default function EventBooking() {

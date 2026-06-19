@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import Image from 'next/image';
 import '../styles/Reelssection.css'
 
 // ─── REELS DATA ───────────────────────────────────────────────────────────────
@@ -202,11 +203,12 @@ const ReelCard = ({ reel, index }) => {
         {/* ── THUMBNAIL STATE ── */}
         {!isPlaying && (
           <>
-            <img
+            <Image
               className="reel-thumbnail"
               src={reel.thumbnail}
               alt={reel.title}
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, 300px"
               draggable={false}
             />
             <div className="reel-vignette" aria-hidden="true" />

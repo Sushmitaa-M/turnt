@@ -119,7 +119,7 @@
   line-height: 1.75;
 }
 
-/* Where Anva Began */
+/* Why We Built Turnt */
 .where-began {
   padding: 100px 24px;
   max-width: 900px;
@@ -167,47 +167,6 @@
 }
 
 .began-text-2 {
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.85;
-  max-width: 560px;
-}
-
-/* Anva Definition */
-.anva-def {
-  padding: 80px 24px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.anva-word {
-  font-family: var(--font-body);
-  font-size: clamp(36px, 7vw, 72px);
-  font-style: italic;
-  font-weight: 300;
-  color: var(--text-subtle);
-  margin-bottom: 4px;
-}
-
-.anva-phonetic {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--text-subtle);
-  margin-bottom: 24px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--border-glass);
-}
-
-.anva-definition {
-  font-size: clamp(16px, 2.5vw, 22px);
-  font-weight: 600;
-  color: var(--text-white);
-  line-height: 1.6;
-  margin-bottom: 20px;
-  max-width: 680px;
-}
-
-.anva-sub-def {
   font-size: 15px;
   color: var(--text-muted);
   line-height: 1.85;

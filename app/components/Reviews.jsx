@@ -3,12 +3,12 @@ import { motion } from 'framer-motion'
 import '../styles/Reviews.css'
 
 const reviews = [
-  { name: 'Harikant', initial: 'H', stars: 5, text: '"HANDS DOWN THE BEST RUN CLUB OUT THERE IN CHENNAI ."', date: '2/15/2026' },
-  { name: 'Akshya', initial: 'A', stars: 5, text: '"Huge thanks to Anva for making my first session so memorable ✨ I was a bit nervous joining for the first time 😅, but the vibe was incredibly welcoming from the start to the end…."', date: '2/14/2026' },
-  { name: 'Lakshan', initial: 'L', stars: 5, text: '"very good well doing"', date: '2/19/2026' },
-  { name: 'Dharmik', initial: 'D', stars: 4, text: '"the best community run I\'ve been to — real energy, real people."', date: '2/12/2026' },
-  { name: 'Priya', initial: 'P', stars: 5, text: '"Joined without knowing anyone. Left with five new friends and a craving for next Saturday."', date: '2/10/2026' },
-  { name: 'Kiran', initial: 'K', stars: 5, text: '"The beach stretch is unreal. Best way to start a Saturday ever."', date: '2/8/2026' },
+  { name: 'Harikant', initial: 'H', stars: 5, text: 'HANDS DOWN THE BEST COMMUNITY OUT THERE IN CHENNAI.', date: '2/15/2026' },
+  { name: 'Akshya', initial: 'A', stars: 5, text: 'Huge thanks to Turnt for making my first meetup so memorable. I was a bit nervous showing up alone, but the vibe was incredibly welcoming from the start to the end.', date: '2/14/2026' },
+  { name: 'Lakshan', initial: 'L', stars: 5, text: 'Such a good time. Already bringing friends to the next one.', date: '2/19/2026' },
+  { name: 'Dharmik', initial: 'D', stars: 4, text: 'the best community meetup I have been to — real energy, real people.', date: '2/12/2026' },
+  { name: 'Priya', initial: 'P', stars: 5, text: 'Joined without knowing anyone. Left with five new friends and a craving for the next hangout.', date: '2/10/2026' },
+  { name: 'Kiran', initial: 'K', stars: 5, text: 'The beach sunset meetup was unreal. Best way to spend a Saturday evening.', date: '2/8/2026' },
 ]
 
 const doubled = [...reviews, ...reviews]

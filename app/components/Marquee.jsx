@@ -2,13 +2,11 @@
 import '../styles/Marquee.css'
 
 const items = [
-  'RUN PLAY CONNECT',
-  'EASY RUN',
-  'BEACH GAMES',
+  'HIGH ENERGY',
   'GOOD VIBES',
-  'SATURDAY RUNS',
-  'COMMUNITY',
-  'CLUB ANVA',
+  'NO BORING SCENES',
+  'CHILL HANGOUTS',
+  'TURNT',
   'CHENNAI',
 ]
 

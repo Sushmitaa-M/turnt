@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import '../styles/FAQ.css'
 
 const faqs = [
-  { q: 'WHAT IS THIS RUN CLUB FOR?', a: "Club Anva is a community-first run club in Chennai. We're for people who want to move, connect, and have fun — not compete. All paces, all levels, all vibes welcome." },
-  { q: 'WHERE DO YOU HOST THE RUNS?', a: "We run at Besant Nagar (Bessyy) — right by the beach in Nassa uth. It's the perfect backdrop for a chill morning." },
-  { q: 'HOW LONG IS THE RUN?', a: "Typically around 3km — enough to break a sweat, not enough to break you. We always follow up with games and hangout time." },
-  { q: 'WHEN DO YOU RUN?', a: "Every Saturday, 6:00–8:00 AM. Early enough to catch the sunrise, early enough to still have your whole day." },
-  { q: 'CAN I BRING A FRIEND?', a: "Absolutely! The more the merrier. Club Anva thrives on new faces and energy. Bring anyone who wants to run, play, and connect." },
+  { q: 'WHAT IS TURNT?', a: "A space to get off your phone and actually meet people in real life. We organize chill hangouts, beach meetups, and good-vibes-only gatherings in Chennai." },
+  { q: 'WHERE DO YOU HOST MEETUPS?', a: "Most of our meetups happen at Besant Nagar Beach — right by the sea. We also explore other spots around Chennai depending on the vibe." },
+  { q: 'DO I NEED TO BRING ANYONE?', a: "Come solo! Most people do, and you'll leave with actual friends. No awkwardness — just good energy and real conversations." },
+  { q: 'WHEN DO YOU MEET UP?', a: "We host events on weekends, usually in the evenings. Follow us on Instagram @turnt.club to stay in the loop on upcoming hangouts." },
+  { q: 'IS IT FREE?', a: "Most of our meetups are free. Some special events might have a small fee to cover snacks or activities — we always let you know upfront." },
 ]
 
 export default function FAQ() {
@@ -27,7 +27,7 @@ export default function FAQ() {
           <span className="white">COMMON </span>
           <span className="orange">QUESTIONS</span>
         </motion.h2>
-        <p className="faq-subtitle">Everything you need to know about joining Chennai's most vibrant running tribe.</p>
+        <p className="faq-subtitle">Everything you need to know about joining Chennai's most vibey community.</p>
       </div>
 
       <div className="faq-list">
