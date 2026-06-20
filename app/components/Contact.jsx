@@ -84,7 +84,7 @@ export default function Contact() {
 
           {/* Email */}
           <a
-            href="mailto:hello@turntchennai.com"
+            href="mailto:syedsma2525@gmail.com"
             className="group flex items-center gap-3 px-8 py-4 rounded-full text-sm font-bold tracking-widest uppercase transition-all duration-300 cursor-pointer border"
             style={{
               borderColor: 'rgba(255,196,107,0.15)',

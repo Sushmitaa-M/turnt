@@ -102,7 +102,7 @@ export default function Footer() {
             <h3 className="text-3xl font-black uppercase tracking-tight text-[#050505]">Say Hi!</h3>
             <p className="text-sm opacity-80 text-[#050505]">Interested in hanging out?</p>
             <a
-              href="mailto:hello@turntchennai.com"
+              href="mailto:syedsma2525@gmail.com"
               className="mt-2 px-8 py-3 bg-[#050505] text-[#F26A0A] rounded-full font-bold uppercase tracking-widest hover:scale-105 hover:shadow-[0_0_20px_rgba(242,106,10,0.5)] transition-all"
             >
               Let&apos;s Chat!
@@ -125,7 +125,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="mailto:hello@turntchennai.com"
+                href="mailto:syedsma2525@gmail.com"
                 className="w-10 h-10 rounded-full border-2 border-[#050505] flex items-center justify-center hover:bg-[#050505] hover:text-[#F26A0A] transition-colors"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
