@@ -1,5 +1,5 @@
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
+import HeroSection from './components/HeroSection'
 import Marquee from './components/Marquee'
 import UpcomingEvents from './components/UpcomingEvents'
 import Gallery from './components/Gallery'
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#050505] text-white flex flex-col">
       <Navbar />
-      <Hero />
+      <HeroSection />
       <Marquee />
       <UpcomingEvents />
       <Gallery />
