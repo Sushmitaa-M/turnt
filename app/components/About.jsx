@@ -61,9 +61,7 @@ export default function About() {
             <motion.p {...spring(0.2)} className="text-base md:text-lg leading-relaxed" style={{ color: 'rgba(255,244,230,0.6)' }}>
               No roles to perform. No pressure to impress. Just people choosing presence, good company, and real connection.
             </motion.p>
-            <motion.p {...spring(0.25)} className="text-sm leading-relaxed" style={{ color: 'rgba(255,244,230,0.35)' }}>
-              You don&apos;t need to be anyone special. You don&apos;t need a plan. You just need to show up. We hold space for every mood, every story, and every vibe.
-            </motion.p>
+            
           </div>
         </div>
 

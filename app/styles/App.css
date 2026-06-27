@@ -3,3 +3,8 @@
 @import url('https://fonts.cdnfonts.com/css/jorgey');
 @import url('https://fonts.cdnfonts.com/css/metultah');
 @import url('https://fonts.cdnfonts.com/css/barlow-condensed');
+
+.glow-layer {
+  position: absolute;
+  pointer-events: none;
+}

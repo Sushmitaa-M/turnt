@@ -12,7 +12,7 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden group mt-20 flex flex-col justify-end min-h-[1100px] md:min-h-[1000px] border-t border-white/5">
+    <footer className="relative w-full overflow-hidden group mt-20 flex flex-col justify-end min-h-[650px] md:min-h-[1000px] border-t border-white/5">
 
       {/* ── SVG Background Layer ── */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -73,9 +73,8 @@ export default function Footer() {
       {/* ── Foreground Content Layer ── */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 pb-8 flex flex-col mt-auto text-[#050505]">
 
-        {/* Spacer blocks to perfectly push text below the SVG on all screens */}
-        <div className="w-full aspect-[2048/1345] md:hidden block pointer-events-none" />
-        <div className="w-full h-[300px] hidden md:block pointer-events-none" />
+        {/* Spacer to position text below the flame artwork */}
+        <div className="w-full h-[180px] md:h-[220px] pointer-events-none" />
 
         {/* Top Row: Navigation & Contact (Breaver Studios Style) */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-16 w-full font-semibold">
@@ -141,9 +140,22 @@ export default function Footer() {
 
         </div>
 
+        {/* Legal & Support Links */}
+        <div className="flex flex-wrap justify-center gap-6 mb-10">
+          <Link href="/privacy" className="text-black font-semibold text-lg tracking-wide hover:text-gray-700 transition-all duration-300 cursor-pointer py-2">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="text-black font-semibold text-lg tracking-wide hover:text-gray-700 transition-all duration-300 cursor-pointer py-2">
+            Terms of Service
+          </Link>
+          <Link href="/support" className="text-black font-semibold text-lg tracking-wide hover:text-gray-700 transition-all duration-300 cursor-pointer py-2">
+            Help & Support
+          </Link>
+        </div>
+
         {/* Massive Bottom Text */}
         <h1
-          className="w-full text-center leading-[0.75] tracking-tighter select-none text-[#050505]"
+          className="w-full text-center leading-[0.75] tracking-tighter select-none text-[#050505] pointer-events-none"
           style={{
             fontFamily: "'Jorgey', sans-serif",
             fontSize: 'clamp(80px, 20vw, 350px)',

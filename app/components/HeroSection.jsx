@@ -2,7 +2,9 @@
 
 import { useRef, useState, useEffect } from 'react'
 
-export default function HeroVideo() {
+
+
+export default function HeroVideo({ onEnded }) {
   const videoRef = useRef(null)
   const [isMuted, setIsMuted] = useState(true)
   const [hasInteracted, setHasInteracted] = useState(false)
@@ -42,12 +44,13 @@ export default function HeroVideo() {
         muted={isMuted}
         playsInline
         controls={false}
-        loop={false} // Crucial: Allows native freeze on final frame
-        preload="auto" // 2026 LCP Optimization priority hint
+        loop={false}
+        preload="auto"
+        onEnded={onEnded}
         className="w-full h-full object-contain pointer-events-none"
       />
 
-      {/* Audio Controller Toggle */}
+      {/* Audio Controller Toggle
       <div className="absolute bottom-10 right-10 z-20">
         <button
           onClick={toggleSound}
@@ -55,7 +58,7 @@ export default function HeroVideo() {
         >
           <span>{isMuted ? '🔇 Muted' : '🔊 Sound On'}</span>
         </button>
-      </div>
+      </div> */}
 
       {/* Ambient Bottom Fade to mask website scroll transition */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] to-transparent pointer-events-none z-10" />
